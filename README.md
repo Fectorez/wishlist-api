@@ -1,11 +1,11 @@
-#Prérequis
+# Prérequis
 Node JS
 SailsJS
 MySQL
 
-#Usage
+# Usage
 npm install
 sails lift
 
-###Adresse
+### Adresse
 localhost:1337
