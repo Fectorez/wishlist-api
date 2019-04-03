@@ -33,5 +33,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  'GET /login': { view: 'login' },
+  'POST /login': 'AuthController.login',
+  '/logout': 'AuthController.logout',
+  'GET /register': { view: 'register' }
 
 };
