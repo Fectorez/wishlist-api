@@ -33,9 +33,18 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  'GET /login': { view: 'login' },
-  'POST /login': 'AuthController.login',
-  '/logout': 'AuthController.logout',
-  'GET /register': { view: 'register' }
+  
+  'POST   /login': 'AuthController.login',
+  '      /logout': 'AuthController.logout',
+
+  'POST /user/:id/wishlists': 'UserController.createWishlist',
+  'POST /wishlist/:id/items': 'WishlistController.createItem',
+
+
+
+
+
+  'GET /register': { view: 'register' },
+  'GET    /login': { view: 'login' }
 
 };

@@ -12,6 +12,7 @@
     "grunt": "1.0.1",
     "jsonwebtoken": "^8.5.1",
     "passport": "^0.4.0",
+    "passport-facebook": "^3.0.0",
     "passport-local": "^1.0.0",
     "sails": "^1.1.0",
     "sails-hook-grunt": "^3.1.0",
