@@ -1,11 +1,10 @@
 # Prérequis
 Node JS  
-SailsJS  
 MySQL  
 
 # Usage
 npm install  
-sails lift  
+node app.js
 
 ### Adresse
 localhost:1337  
