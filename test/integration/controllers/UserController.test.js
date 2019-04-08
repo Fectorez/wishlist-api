@@ -1,29 +1,27 @@
 var supertest = require('supertest');
 
-describe('UserController.login', function() {
+describe('UserController', function() {
 
-  describe('#login()', function() {
+  describe('#createWishlist()', function() {
 
-    it('Should fail with bad username', function (done) {
-      supertest(sails.hooks.http.app)
-      .post('/login')
-      .send({ username: 'badUsername', password: 'password' })
-      .expect(401, done);
+    it('Should succeed with correct owner id', function (done) {
+      User.find({limit: 1}).exec( (err, users) => {
+        const userId = users[0].id;
+        supertest(sails.hooks.http.app)
+        .post('/user/' + userId + '/wishlists')
+        .send({ name: 'wishlistTestSucceed' })
+        .expect(200, done);
+      });
     });
 
-    it('Should fail with bad password', function (done) {
+    it('Should fail with incorrect owner id', function (done) {
+      const userId = 999999;
       supertest(sails.hooks.http.app)
-      .post('/login')
-      .send({ username: 'test', password: 'badPassword' })
-      .expect(401, done);
+      .post('/user/' + userId + '/wishlists')
+      .send({ name: 'wishlistTestFail' })
+      .expect(404, done);
     });
 
-    it('Should succeed with correct credentials', function (done) {
-      supertest(sails.hooks.http.app)
-      .post('/login')
-      .send({ username: 'test', password: 'azerty123' })
-      .expect(200, done);
-    });
   });
 
 });
