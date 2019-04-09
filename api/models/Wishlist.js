@@ -26,5 +26,20 @@ module.exports = {
 
   },
 
+
+  beforeDestroy: function(criteria, cb) {
+    Wishlist.find(criteria).populate('items').exec(function(err, wishlists) {
+      if ( err ) return cb(err);
+      var itemsIds = [];
+      wishlists.forEach(function(recordToDestroy) {
+        itemsIds = itemsIds.concat(_.pluck(recordToDestroy.items, 'id'));
+      });
+      Item.destroy({id: itemsIds}).exec(function(err) {
+        if ( err ) return cb(err);
+        return cb();
+      });
+    });
+  }
+
 };
 

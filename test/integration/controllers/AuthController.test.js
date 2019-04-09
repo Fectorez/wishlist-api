@@ -14,14 +14,14 @@ describe('AuthController.login', function() {
     it('Should fail with bad password', function (done) {
       supertest(sails.hooks.http.app)
       .post('/login')
-      .send({ username: 'test', password: 'badPassword' })
+      .send({ username: 'userTest', password: 'badPassword' })
       .expect(401, done);
     });
 
     it('Should succeed with correct credentials', function (done) {
       supertest(sails.hooks.http.app)
       .post('/login')
-      .send({ username: 'test', password: 'azerty123' })
+      .send({ username: 'userTest', password: 'azerty123' })
       .expect(200, done);
     });
   });

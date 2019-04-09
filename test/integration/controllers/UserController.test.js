@@ -24,4 +24,33 @@ describe('UserController', function() {
 
   });
 
+
+  describe('#deleteItem()', function() {
+
+    it('Should succeed', function (done) {
+      User.create({username: "userTestDelete", email: "userTestDelete@yopmail.com", password: "azerty123"}).fetch().exec( (err, user) => {
+        if ( err ) throw err;
+        supertest(sails.hooks.http.app)
+        .delete('/user/' + user.id)
+        .expect(200, done);
+      });
+    });
+
+    it('Related wishlist should be destroyed', function (done) {
+      User.create({username: "userTestDeleteCascade", email: "userTestDeleteCascade@yopmail.com", password: "azerty123"}).fetch().exec( (err, user) => {
+        if ( err ) throw err;
+        Wishlist.create({name: "wishlistDestroyedByCascade", owner: user.id}).fetch().exec( (err, wishlistDestroyedByCascade) => {
+          if ( err ) throw err;
+          User.destroy(user).exec( err => {
+            if ( err ) throw err;
+            supertest(sails.hooks.http.app)
+            .get('/wishlist/' + wishlistDestroyedByCascade.id)
+            .expect(404, done);
+          });
+        });
+      });
+    });
+    
+  });
+
 });

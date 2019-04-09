@@ -14,7 +14,7 @@ before(function(done) {
     // and disable all logs except errors and warnings:
     hooks: { grunt: false },
     log: { level: 'warn' },
-    datastore: { default: { url: 'mysql://sails:sails@localhost/iwish_tests' } }
+    datastore: { default: { url: 'mysql://sails:sails@localhost/iwish_tests' } } // iwish_tests doesn't work
 
   }, async function(err) {
     if (err) { return done(err); }
@@ -22,7 +22,11 @@ before(function(done) {
     // here you can load fixtures, etc.
     // (for example, you might want to create some records in the database)
 
-    await User.create({username: "test", email: "test@yopmail.com", password: "azerty123"});
+    await User.create({username: "userTest", email: "userTest@yopmail.com", password: "azerty123"}).fetch();
+
+    /*const userTestCascade = await User.create({username: "userTestCascade", email: "userTestCascade@yopmail.com", password: "azerty123"}).fetch();
+    const wishlistTestCascade = await Wishlist.create({name: "wishlistTestCascade", owner: userTestCascade.id}).fetch();
+    const itemTestCascade = await Item.create({name: "itemTestCascade", price: 9.99, wishlist: wishlistTestCascade.id}).fetch();*/
 
     return done();
   });
@@ -34,7 +38,7 @@ after(function(done) {
   // here you can clear fixtures, etc.
   // (e.g. you might want to destroy the records you created above)
 
-  User.destroy({username: "test"}).then( () => {
+  User.destroy({username: "userTest"}).then( () => {
     sails.lower(done);
   });
 

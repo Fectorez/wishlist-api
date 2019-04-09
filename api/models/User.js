@@ -39,7 +39,7 @@ module.exports = {
     return _.omit(this, ['password']);
   },
 
-  beforeCreate: function(user, cb){
+  beforeCreate: function(user, cb) {
     bcrypt.genSalt(10, (err, salt) => {
       if( err ) {
         return cb(err);
@@ -52,6 +52,21 @@ module.exports = {
         return cb();
       });
     });
+  },
+
+  beforeDestroy: function(criteria, cb) {
+    User.find(criteria).populate('wishlists').exec(function(err, users) {
+      if ( err ) return cb(err);
+      var wishlistsIds = [];
+      users.forEach(function(recordToDestroy) {
+        wishlistsIds = wishlistsIds.concat(_.pluck(recordToDestroy.wishlists, 'id'));
+      });
+      Wishlist.destroy({id: wishlistsIds}).exec(function(err) {
+        if ( err ) return cb(err);
+        return cb();
+      });
+    });
   }
+
 };
 

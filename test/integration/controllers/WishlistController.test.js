@@ -24,4 +24,37 @@ describe('WishlistController', function() {
 
   });
 
+  describe('#deleteItem()', function() {
+
+    it('Should succeed', function (done) {
+      User.find({limit: 1}).exec( (err, users) => {
+        if ( err ) throw err;
+        Wishlist.create({name: "wishlistTestCascade", owner: users[0].id}).fetch().exec( (err, wishlist) => {
+          if ( err ) throw err;
+          supertest(sails.hooks.http.app)
+          .delete('/wishlist/' + wishlist.id)
+          .expect(200, done);
+        });
+      });
+    });
+
+    it('Related item should be destroyed', function (done) {
+      User.find({limit: 1}).exec( (err, users) => {
+        if ( err ) throw err;
+        Wishlist.create({name: "wishlistTestCascade", owner: users[0].id}).fetch().exec( (err, wishlistTestCascade) => {
+          if ( err ) throw err;
+          Item.create({name: "itemDeletedWithCascade", price: 9.99, wishlist: wishlistTestCascade.id}).fetch().exec( (err, itemDeletedWithCascade) => {
+            if ( err ) throw err;
+            Wishlist.destroy(wishlistTestCascade).exec( err => {
+              if ( err ) throw err;
+              supertest(sails.hooks.http.app)
+              .get('/item/' + itemDeletedWithCascade.id)
+              .expect(404, done);
+            });
+          });
+        });
+      });
+    });
+  });
+
 });
