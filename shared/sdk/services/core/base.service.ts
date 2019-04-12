@@ -7,11 +7,11 @@ import { SailsConfig } from '../../sails.config';
 @Injectable()
 export class BaseSailsApi {
 
-    private actionUrl: string;
+    protected actionUrl: string;
 
     constructor(protected http: HttpClient,
                 modelPath: string) {
-        this.actionUrl = SailsConfig.getPath() + "/" + modelPath;
+        this.actionUrl = SailsConfig.getPath() + '/' + modelPath + '/';
     }
 
     public findAll<T>(): Observable<T> {
