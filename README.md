@@ -28,3 +28,30 @@ Pour pouvoir utiliser le web service et les modèles
     });
     ```  
 Nécessite d'ajouter `import { ItemApi, Item } from 'src/shared/sdk';` et `private itemApi: ItemApi` dans le constructeur.  
+
+## API et méthodes disponibles
+
+Pour chaque API de modèle sont présentes les méthodes suivantes (avec T le modèle correspondant):
+- `findAll<T>(): Observable<T>`
+- `findById<T>(id: number): Observable<T>`
+- `create<T>(data: T): Observable<T>`
+- `update<T>(id: number, data: T): Observable<T>`
+- `delete<T>(id: number): Observable<T>`
+
+### UserApi
+- `findByIdWishlists<Wishlist>(id: number): Observable<Wishlist[]>`
+- `createWishlist<Wishlist>(id: number, data: Wishlist): Observable<Wishlist>`
+
+### WishlistApi
+- `findByIdItems<Item>(id: number): Observable<Item[]>`
+- `createItem<Item>(id: number, data: Item): Observable<Item>`
+
+### Exemple avec une création d'un item pour la wishlist 1
+```
+let item = new Item();
+item.name = "TV";
+item.price = 299.99;
+this.wishlistApi.createItem(1, item).subscribe((data: Item) => {
+    console.log("created via wishlist item:",data);
+});
+```

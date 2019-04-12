@@ -14,8 +14,8 @@ export class WishlistApi extends BaseSailsApi {
         super(http, 'wishlist');
     }
 
-    public findByIdItems<Item>(id: number): Observable<Item> {
-        return this.http.get<Item>(this.actionUrl + id + '/' + this.itemRelation);
+    public findByIdItems<Item>(id: number): Observable<Item[]> {
+        return this.http.get<Item[]>(this.actionUrl + id + '/' + this.itemRelation);
     }
 
     public createItem<Item>(id: number, data: Item): Observable<Item> {

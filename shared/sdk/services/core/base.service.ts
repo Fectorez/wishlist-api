@@ -14,8 +14,8 @@ export class BaseSailsApi {
         this.actionUrl = SailsConfig.getPath() + '/' + modelPath + '/';
     }
 
-    public findAll<T>(): Observable<T> {
-        return this.http.get<T>(this.actionUrl);
+    public findAll<T>(): Observable<T[]> {
+        return this.http.get<T[]>(this.actionUrl);
     }
 
     public findById<T>(id: number): Observable<T> {
