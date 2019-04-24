@@ -22,12 +22,4 @@ export class UserApi extends BaseSailsApi {
     public createWishlist<Wishlist>(id: number, data: Wishlist): Observable<Wishlist> {
         return this.http.post<Wishlist>(this.actionUrl + id + '/' + this.wishlistRelation, data);
     }
-
-    public findByIdJackpots<Jackpot>(id: number): Observable<Jackpot[]> {
-        return this.http.get<Jackpot[]>(this.actionUrl + id + '/' + this.jackpotRelation);
-    }
-
-    public createJackpot<Jackpot>(id: number, data: Jackpot): Observable<Jackpot> {
-        return this.http.post<Jackpot>(this.actionUrl + id + '/' + this.jackpotRelation, data);
-    }
 }

@@ -45,6 +45,12 @@ Pour chaque API de modèle sont présentes les méthodes suivantes (avec T le mo
 ### WishlistApi
 - `findByIdItems<Item>(id: number): Observable<Item[]>`
 - `createItem<Item>(id: number, data: Item): Observable<Item>`
+- `findByIdJackpots<Jackpot>(id: number): Observable<Jackpot[]>`
+- `createJackpot<Jackpot>(id: number, data: Jackpot): Observable<Jackpot>`
+
+### JackpotApi
+- `findByIdItems<Item>(id: number): Observable<Item[]>`
+- `createItem<Item>(id: number, data: Item): Observable<Item>`
 
 ### Exemple avec une création d'un item pour la wishlist 1
 ```
