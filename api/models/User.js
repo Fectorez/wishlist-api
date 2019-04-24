@@ -55,6 +55,10 @@ module.exports = {
   },
 
   beforeDestroy: function(criteria, cb) {
+    /*
+      Avant sa destruction, détruire ses relations
+      (wishlists)
+    */
     User.find(criteria).populate('wishlists').exec(function(err, users) {
       if ( err ) return cb(err);
       var wishlistsIds = [];

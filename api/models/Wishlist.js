@@ -22,21 +22,35 @@ module.exports = {
     items: {
       collection: 'item',
       via: 'wishlist'
+    },
+
+    jackpots: {
+      collection: 'jackpot',
+      via: 'wishlist'
     }
 
   },
 
 
   beforeDestroy: function(criteria, cb) {
-    Wishlist.find(criteria).populate('items').exec(function(err, wishlists) {
+    /*
+      Détruire les relations avant l'objet lui-même
+      (items et jackpots)
+    */
+    Wishlist.find(criteria).populate('items').populate('jackpots').exec(function(err, wishlists) {
       if ( err ) return cb(err);
       var itemsIds = [];
+      var jackpotsIds = [];
       wishlists.forEach(function(recordToDestroy) {
         itemsIds = itemsIds.concat(_.pluck(recordToDestroy.items, 'id'));
+        jackpotsIds = jackpotsIds.concat(_.pluck(recordToDestroy.jackpots, 'id'));
       });
       Item.destroy({id: itemsIds}).exec(function(err) {
         if ( err ) return cb(err);
-        return cb();
+        Jackpot.destroy({id: jackpotsIds}).exec(function(err) {
+          if ( err ) return cb(err);
+          return cb();
+        });
       });
     });
   }

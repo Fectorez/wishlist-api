@@ -2,6 +2,18 @@ var supertest = require('supertest');
 
 describe('UserController', function() {
 
+  describe('#delete()', function() {
+
+    it('Should succeed', function (done) {
+      User.create({username: "userTestDelete", email: "userTestDelete@yopmail.com", password: "azerty123"}).fetch().exec( (err, user) => {
+        if ( err ) throw err;
+        supertest(sails.hooks.http.app)
+        .delete('/user/' + user.id)
+        .expect(200, done);
+      });
+    });
+  });
+
   describe('#createWishlist()', function() {
 
     it('Should succeed with correct owner id', function (done) {
@@ -26,15 +38,6 @@ describe('UserController', function() {
 
 
   describe('#deleteItem()', function() {
-
-    it('Should succeed', function (done) {
-      User.create({username: "userTestDelete", email: "userTestDelete@yopmail.com", password: "azerty123"}).fetch().exec( (err, user) => {
-        if ( err ) throw err;
-        supertest(sails.hooks.http.app)
-        .delete('/user/' + user.id)
-        .expect(200, done);
-      });
-    });
 
     it('Related wishlist should be destroyed', function (done) {
       User.create({username: "userTestDeleteCascade", email: "userTestDeleteCascade@yopmail.com", password: "azerty123"}).fetch().exec( (err, user) => {

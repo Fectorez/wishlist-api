@@ -22,8 +22,8 @@ before(function(done) {
     // here you can load fixtures, etc.
     // (for example, you might want to create some records in the database)
 
-    await User.create({username: "userTest", email: "userTest@yopmail.com", password: "azerty123"}).fetch();
-
+    const userTest = await User.create({username: "userTest", email: "userTest@yopmail.com", password: "azerty123"}).fetch();
+    const wishlistTest = await Wishlist.create({name: "wishlistTest", owner: userTest.id}).fetch();
     /*const userTestCascade = await User.create({username: "userTestCascade", email: "userTestCascade@yopmail.com", password: "azerty123"}).fetch();
     const wishlistTestCascade = await Wishlist.create({name: "wishlistTestCascade", owner: userTestCascade.id}).fetch();
     const itemTestCascade = await Item.create({name: "itemTestCascade", price: 9.99, wishlist: wishlistTestCascade.id}).fetch();*/
