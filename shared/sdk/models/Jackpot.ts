@@ -1,43 +1,46 @@
 import {
-    User, Item
+    Wishlist, User
 } from '../index';
 
-export interface WishlistInterface {
+export interface JackpotInterface {
     id?: number;
     createdAt?: number;
     updatedAt?: number;
     name: string;
+    wishlist?: Wishlist;
+    wishlistId?: number;
     owner?: User;
     ownerId?: number;
-    items?: Item[];
 }
 
-export class Wishlist {
+export class Jackpot {
     id: number;
     createdAt: number;
     updatedAt: number;
     name: string;
+    price?: number;
+    wishlist?: Wishlist;
+    wishlistId?: number;
     owner?: User;
     ownerId?: number;
-    items?: Item[];
 
     public static getModelName() {
-        return "Wishlist";
+        return "Jackpot";
     }
 
-    constructor(data?: WishlistInterface) {
+    constructor(data?: JackpotInterface) {
         Object.assign(this, data);
     }
 
-    public static factory(data: WishlistInterface): Wishlist{
-        return new Wishlist(data);
+    public static factory(data: JackpotInterface): Jackpot {
+        return new Jackpot(data);
     }
 
     public static getModelDefinition() {
         return {
-            name: 'Wishlist',
-            plural: 'Wishlists',
-            path: 'Wishlist',
+            name: 'Jackpot',
+            plural: 'Jackpots',
+            path: 'Jackpot',
             idName: 'id'
         }
     }

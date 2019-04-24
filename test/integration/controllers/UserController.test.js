@@ -12,6 +12,40 @@ describe('UserController', function() {
         .expect(200, done);
       });
     });
+
+    it('Related wishlist should be destroyed', function (done) {
+      User.create({username: "userTestDeleteCascade", email: "userTestDeleteCascade@yopmail.com", password: "azerty123"}).fetch().exec( (err, user) => {
+        if ( err ) throw err;
+        Wishlist.create({name: "wishlistDestroyedByCascade", owner: user.id}).fetch().exec( (err, wishlistDestroyedByCascade) => {
+          if ( err ) throw err;
+          User.destroy(user).exec( err => {
+            if ( err ) throw err;
+            supertest(sails.hooks.http.app)
+            .get('/wishlist/' + wishlistDestroyedByCascade.id)
+            .expect(404, done);
+          });
+        });
+      });
+    });
+
+    it('Related jackpot should be destroyed', function (done) {
+      User.create({username: "userTestDeleteCascade", email: "userTestDeleteCascade@yopmail.com", password: "azerty123"}).fetch().exec( (err, user) => {
+        if ( err ) throw err;
+        Wishlist.create({name: "wishlistDestroyedByCascade", owner: user.id}).fetch().exec( (err, wishlistDestroyedByCascade) => {
+          if ( err ) throw err;
+          Jackpot.create({name: "jackpotDestroyedByCascade", owner: user.id, wishlist: wishlistDestroyedByCascade.id}).fetch().exec( (err, jackpotDestroyedByCascade) => {
+            if ( err ) throw err;
+            User.destroy(user).exec( err => {
+              if ( err ) throw err;
+              supertest(sails.hooks.http.app)
+              .get('/jackpot/' + jackpotDestroyedByCascade.id)
+              .expect(404, done);
+            });
+          });
+        });
+      });
+    });
+
   });
 
   describe('#createWishlist()', function() {
@@ -36,24 +70,5 @@ describe('UserController', function() {
 
   });
 
-
-  describe('#deleteItem()', function() {
-
-    it('Related wishlist should be destroyed', function (done) {
-      User.create({username: "userTestDeleteCascade", email: "userTestDeleteCascade@yopmail.com", password: "azerty123"}).fetch().exec( (err, user) => {
-        if ( err ) throw err;
-        Wishlist.create({name: "wishlistDestroyedByCascade", owner: user.id}).fetch().exec( (err, wishlistDestroyedByCascade) => {
-          if ( err ) throw err;
-          User.destroy(user).exec( err => {
-            if ( err ) throw err;
-            supertest(sails.hooks.http.app)
-            .get('/wishlist/' + wishlistDestroyedByCascade.id)
-            .expect(404, done);
-          });
-        });
-      });
-    });
-    
-  });
 
 });

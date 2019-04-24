@@ -9,7 +9,7 @@ export interface ItemInterface {
     name: string;
     price?: number;
     wishlist?: Wishlist;
-    wishlistId?: Wishlist;
+    wishlistId?: number;
 }
 
 export class Item {
@@ -19,7 +19,7 @@ export class Item {
     name: string;
     price?: number;
     wishlist?: Wishlist;
-    wishlistId?: Wishlist;
+    wishlistId?: number;
 
     public static getModelName() {
         return "Item";

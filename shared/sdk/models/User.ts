@@ -1,5 +1,5 @@
 import {
-    Wishlist
+    Wishlist, Jackpot
 } from '../index';
 
 export interface UserInterface {
@@ -10,6 +10,7 @@ export interface UserInterface {
     username: string;
     password: string;
     wishlists?: Wishlist[];
+    jackpots?: Jackpot[];
 }
 
 export class User {
@@ -17,6 +18,7 @@ export class User {
     username: string;
     password: string;
     wishlists?: Wishlist[];
+    jackpots?: Jackpot[];
 
     public static getModelName() {
         return "User";

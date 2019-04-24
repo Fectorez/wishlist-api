@@ -32,7 +32,13 @@ module.exports = {
     wishlists: {
       collection: 'wishlist',
       via: 'owner'
+    },
+
+    jackpots: {
+      collection: 'jackpot',
+      via: 'owner'
     }
+
   },
 
   customToJSON: function() {
@@ -57,17 +63,22 @@ module.exports = {
   beforeDestroy: function(criteria, cb) {
     /*
       Avant sa destruction, détruire ses relations
-      (wishlists)
+      (wishlists, jackpots)
     */
     User.find(criteria).populate('wishlists').exec(function(err, users) {
       if ( err ) return cb(err);
       var wishlistsIds = [];
+      var jackpotsIds = [];
       users.forEach(function(recordToDestroy) {
         wishlistsIds = wishlistsIds.concat(_.pluck(recordToDestroy.wishlists, 'id'));
+        jackpotsIds = jackpotsIds.concat(_.pluck(recordToDestroy.jackpots, 'id'));
       });
       Wishlist.destroy({id: wishlistsIds}).exec(function(err) {
         if ( err ) return cb(err);
-        return cb();
+        Jackpot.destroy({id: jackpotsIds}).exec(function(err) {
+          if ( err ) return cb(err);
+          return cb();
+        });
       });
     });
   }
