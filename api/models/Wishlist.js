@@ -14,20 +14,32 @@ module.exports = {
       required: true
     },
 
-    owner: {
-      model: 'user',
-      required: true
+    public: {
+      type: 'boolean',
+      defaultsTo: true
     },
+
+
 
     items: {
       collection: 'item',
       via: 'wishlist'
     },
 
-    jackpots: {
-      collection: 'jackpot',
+    prizePool: {
+      collection: 'prizepool',
       via: 'wishlist'
-    }
+    },
+
+    owner: {
+      model: 'user',
+      required: true
+    },
+
+    participants: {
+      collection: 'user',
+      via: 'concernedWishlists'
+    },
 
   },
 

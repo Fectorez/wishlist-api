@@ -11,16 +11,40 @@ module.exports = {
 
     name: {
       type: 'string',
-      required: true,
+      required: true
     },
 
-    price: {
+    description: {
+      type: 'string'
+    },
+
+    amount: {
       type: 'number',
+      required: true
     },
 
+    image: {
+      type: 'string'
+    },
+
+    link: {
+      type: 'string'
+    },
+
+    position: {
+      type: 'number',
+      required: true
+    },
+
+
+    
     wishlist: {
       model: 'wishlist',
       required: true
+    },
+
+    category: {
+      model: 'category'
     }
 
   }

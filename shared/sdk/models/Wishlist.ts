@@ -1,5 +1,5 @@
 import {
-    User, Item
+    Item, PrizePool, User
 } from '../index';
 
 export interface WishlistInterface {
@@ -7,9 +7,13 @@ export interface WishlistInterface {
     createdAt?: number;
     updatedAt?: number;
     name: string;
+    public: boolean;
+    items?: Item[];
+    prizePool?: PrizePool;
+    prizePoolId?: number;
     owner?: User;
     ownerId?: number;
-    items?: Item[];
+    participants?: User[];
 }
 
 export class Wishlist {
@@ -17,9 +21,13 @@ export class Wishlist {
     createdAt: number;
     updatedAt: number;
     name: string;
+    public: boolean;
+    items?: Item[];
+    prizePool?: PrizePool;
+    prizePoolId?: number;
     owner?: User;
     ownerId?: number;
-    items?: Item[];
+    participants?: User[];
 
     public static getModelName() {
         return "Wishlist";
@@ -38,7 +46,14 @@ export class Wishlist {
             name: 'Wishlist',
             plural: 'Wishlists',
             path: 'Wishlist',
-            idName: 'id'
+            idName: 'id',
+            relations: {
+                participants: {
+                    name: 'participants',
+                    type: 'User[]',
+                    model: 'User'
+                }
+            }
         }
     }
 }

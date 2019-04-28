@@ -18,15 +18,35 @@ module.exports = {
       unique: true
     },
 
-    username: {
-      type: 'string',
-      required: true,
-      unique: true
-    },
-
     password: {
       type: 'string',
       required: true
+    },
+
+    firstName: {
+      type: 'string',
+      required: true,
+    },
+
+    lastName: {
+      type: 'string',
+      required: true,
+    },
+
+
+    categories: {
+      collection: 'category',
+      via: 'fans'
+    },
+
+    managedPrizePools: {
+      collection: 'prizepool',
+      via: 'manager'
+    },
+
+    donations: {
+      collection: 'donation',
+      via: 'donor'
     },
 
     wishlists: {
@@ -34,9 +54,9 @@ module.exports = {
       via: 'owner'
     },
 
-    jackpots: {
-      collection: 'jackpot',
-      via: 'owner'
+    concernedWishlists: {
+      collection: 'wishlist',
+      via: 'participants'
     }
 
   },

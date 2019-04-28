@@ -39,7 +39,6 @@ module.exports.routes = {
 
   'POST /user/:id/wishlists': 'UserController.createWishlist',
   'POST /wishlist/:id/items': 'WishlistController.createItem',
-  'POST /wishlist/:id/jackpots': 'WishlistController.createJackpot',
 
 
 

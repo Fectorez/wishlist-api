@@ -7,7 +7,11 @@ export interface ItemInterface {
     createdAt?: number;
     updatedAt?: number;
     name: string;
-    price?: number;
+    description?: string;
+    amount: number;
+    image: string;
+    link: string;
+    position: number;
     wishlist?: Wishlist;
     wishlistId?: number;
 }
@@ -17,7 +21,11 @@ export class Item {
     createdAt: number;
     updatedAt: number;
     name: string;
-    price?: number;
+    description?: string;
+    amount: number;
+    image: string;
+    link: string;
+    position: number;
     wishlist?: Wishlist;
     wishlistId?: number;
 
@@ -29,7 +37,7 @@ export class Item {
         Object.assign(this, data);
     }
 
-    public static factory(data: ItemInterface): Item{
+    public static factory(data: ItemInterface): Item {
         return new Item(data);
     }
 

@@ -38,26 +38,5 @@ Pour chaque API de modèle sont présentes les méthodes suivantes (avec T le mo
 - `update<T>(id: number, data: T): Observable<T>`
 - `delete<T>(id: number): Observable<T>`
 
-### UserApi
-- `findByIdWishlists<Wishlist>(id: number): Observable<Wishlist[]>`
-- `createWishlist<Wishlist>(id: number, data: Wishlist): Observable<Wishlist>`
-
-### WishlistApi
+Sont aussi disponibles les méthodes GET pour chaque relation ; exemple pour récupérer les items d'une wishlist:
 - `findByIdItems<Item>(id: number): Observable<Item[]>`
-- `createItem<Item>(id: number, data: Item): Observable<Item>`
-- `findByIdJackpots<Jackpot>(id: number): Observable<Jackpot[]>`
-- `createJackpot<Jackpot>(id: number, data: Jackpot): Observable<Jackpot>`
-
-### JackpotApi
-- `findByIdItems<Item>(id: number): Observable<Item[]>`
-- `createItem<Item>(id: number, data: Item): Observable<Item>`
-
-### Exemple avec une création d'un item pour la wishlist 1
-```
-let item = new Item();
-item.name = "TV";
-item.price = 299.99;
-this.wishlistApi.createItem(1, item).subscribe((data: Item) => {
-    console.log("created via wishlist item:",data);
-});
-```
