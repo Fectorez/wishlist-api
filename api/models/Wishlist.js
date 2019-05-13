@@ -14,7 +14,7 @@ module.exports = {
       required: true
     },
 
-    public: {
+    isPublic: {
       type: 'boolean',
       defaultsTo: true
     },

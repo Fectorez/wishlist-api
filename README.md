@@ -40,3 +40,41 @@ Pour chaque API de modèle sont présentes les méthodes suivantes (avec T le mo
 
 Sont aussi disponibles les méthodes GET pour chaque relation ; exemple pour récupérer les items d'une wishlist:
 - `findByIdItems<Item>(id: number): Observable<Item[]>`
+
+## Authentification
+Module : AuthenticationApi (shared/sdk/services/custom/authentication.ts)  
+
+Méthodes :  
+- `public login(credentials: any): Observable<LoginResponse>`
+- `public logout(): Observable<any>`
+- `public storeInfo(loginResponse: LoginResponse): void`
+- `public removeInfo(): void`
+- `public getToken(): string`
+- `public getCurrentUserId(): number`
+- `public getCurrentUserEmail(): string`
+- `public isAuthenticated(): boolean`
+- `public getCurrentUser(): Observable<User>`
+
+Remarque : Pour l'instant, il faut exécuter `storeInfo()` dans le "subscribe" de l'appel à "login()".  
+
+Pour tester l'authentification :  
+```
+this.authApi.login({email: 'toto2@yopmail.com', password: 'toto'}).subscribe((loginResponse: LoginResponse) => {
+      this.authApi.storeInfo(loginResponse); // Mettre le token (avec id et email de l'user) dans le localStorage
+
+      console.log("is auth ? ", this.authApi.isAuthenticated()); // true
+
+      if ( this.authApi.isAuthenticated() ) { // true
+        this.authApi.getCurrentUser().subscribe( (user: User) => {
+          console.log("current user = ", user); // affichage de toutes les infos de l'user
+        })
+      }
+
+      this.authApi.logout().subscribe( () => {
+        this.authApi.removeInfo(); // supprime le token (avec id et email de l'user) du localStorage
+        console.log("logout ok");
+        console.log("current user id = ", this.authApi.getCurrentUserId()); // répond 0 je ne sais pas encore pourquoi...
+        console.log("is auth ? ", this.authApi.isAuthenticated()); // false
+      })
+    });
+```

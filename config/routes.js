@@ -45,6 +45,8 @@ module.exports.routes = {
 
 
   'GET /register': { view: 'register' },
-  'GET    /login': { view: 'login' }
+  'GET    /login': { view: 'login' },
+
+  'get /user/token': 'AuthController.token'
 
 };
