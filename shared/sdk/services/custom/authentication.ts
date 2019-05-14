@@ -55,7 +55,9 @@ export class AuthenticationApi {
     }
 
     public getCurrentUserId(): number {
-        return +localStorage.getItem("id");
+        if ( localStorage.getItem("id") )
+            return +localStorage.getItem("id");
+        return null;
     }
 
     public getCurrentUserEmail(): string {
