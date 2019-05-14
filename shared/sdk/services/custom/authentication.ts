@@ -5,6 +5,7 @@ import { User } from '../..';
 import { SailsConfig } from '../../sails.config';
 import { getToken } from '@angular/router/src/utils/preactivation';
 import { UserApi } from './User';
+import { LoginResponse } from '../../models/LoginResponse';
 
 @Injectable()
 export class AuthenticationApi {
@@ -17,12 +18,23 @@ export class AuthenticationApi {
     ) {
     }
       
-    public login(credentials: any): Observable<LoginResponse> {
-        return this.http.post<LoginResponse>(SailsConfig.getPath() + '/' + this.loginPath, credentials);
+    public login(credentials: any): Promise<any> {
+        return new Promise( (resolve, reject) => {
+            this.http.post<LoginResponse>(SailsConfig.getPath() + '/' + this.loginPath, credentials)
+            .subscribe( (loginResponse: LoginResponse) => {
+                this.storeInfo(loginResponse);
+                resolve();
+            });
+        });
     }
 
-    public logout(): Observable<any> {
-        return this.http.get<any>(SailsConfig.getPath() + '/' + this.logoutPath);
+    public logout(): Promise<any> {
+        return new Promise( (resolve, reject) => {
+            this.http.get<any>(SailsConfig.getPath() + '/' + this.logoutPath)
+            .subscribe( () => {
+                resolve();
+            });
+        });
     }
 
     public storeInfo(loginResponse: LoginResponse): void {
@@ -55,14 +67,5 @@ export class AuthenticationApi {
 
     public getCurrentUser(): Observable<User> {
         return this.userApi.findById(this.getCurrentUserId());
-    }
-}
-
-export class LoginResponse {
-    message: string;
-    user: {
-        id: number;
-        email: string;
-        token: string;
     }
 }
