@@ -20,7 +20,10 @@ module.exports = {
       }
       req.logIn(user, (err) => {
         if ( err ) {
-          return res.status(401).send(err);
+          return res.status(401).send({
+            message: info.message,
+            user
+          });
         }
         user.token = jwt.sign(user, "secret", {
           expiresIn: '7d'

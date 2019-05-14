@@ -24,6 +24,8 @@ export class AuthenticationApi {
             .subscribe( (loginResponse: LoginResponse) => {
                 this.storeInfo(loginResponse);
                 resolve();
+            }, errResponse => {
+                reject(errResponse.error);
             });
         });
     }
@@ -34,17 +36,19 @@ export class AuthenticationApi {
             .subscribe( () => {
                 this.removeInfo();
                 resolve();
+            }, err => {
+                reject(err);
             });
         });
     }
 
-    public storeInfo(loginResponse: LoginResponse): void {
+    private storeInfo(loginResponse: LoginResponse): void {
         localStorage.setItem("token", loginResponse.user.token);
         localStorage.setItem("id", loginResponse.user.id.toString());
         localStorage.setItem("email", loginResponse.user.email);
     }
 
-    public removeInfo(): void {
+    private removeInfo(): void {
         localStorage.removeItem("token");
         localStorage.removeItem("id");
         localStorage.removeItem("email");
