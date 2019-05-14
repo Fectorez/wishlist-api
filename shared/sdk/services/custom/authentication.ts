@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { User } from '../..';
 import { SailsConfig } from '../../sails.config';
 import { getToken } from '@angular/router/src/utils/preactivation';
@@ -18,26 +18,30 @@ export class AuthenticationApi {
     ) {
     }
       
-    public login(credentials: any): Promise<any> {
-        return new Promise( (resolve, reject) => {
+    public login(credentials: any): Observable<LoginResponse> {
+        return new Observable(observer => {
             this.http.post<LoginResponse>(SailsConfig.getPath() + '/' + this.loginPath, credentials)
             .subscribe( (loginResponse: LoginResponse) => {
                 this.storeInfo(loginResponse);
-                resolve();
+                observer.next();
             }, errResponse => {
-                reject(errResponse.error);
+                observer.error(errResponse.error);
+            }, () => {
+                observer.complete();
             });
         });
     }
 
-    public logout(): Promise<any> {
-        return new Promise( (resolve, reject) => {
+    public logout(): Observable<void> {
+        return new Observable(observer => {
             this.http.get<any>(SailsConfig.getPath() + '/' + this.logoutPath)
             .subscribe( () => {
                 this.removeInfo();
-                resolve();
+                observer.next();
             }, err => {
-                reject(err);
+                observer.error(err);
+            }, () => {
+                observer.complete();
             });
         });
     }
