@@ -32,6 +32,7 @@ export class AuthenticationApi {
         return new Promise( (resolve, reject) => {
             this.http.get<any>(SailsConfig.getPath() + '/' + this.logoutPath)
             .subscribe( () => {
+                this.removeInfo();
                 resolve();
             });
         });
