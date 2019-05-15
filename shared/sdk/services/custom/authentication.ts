@@ -23,7 +23,7 @@ export class AuthenticationApi {
             this.http.post<LoginResponse>(SailsConfig.getPath() + '/' + this.loginPath, credentials)
             .subscribe( (loginResponse: LoginResponse) => {
                 this.storeInfo(loginResponse);
-                observer.next();
+                observer.next(loginResponse);
             }, errResponse => {
                 observer.error(errResponse.error);
             }, () => {

@@ -14,6 +14,7 @@ module.exports = {
     passport.authenticate('local', (err, user, info) => {
       if ( err || !user ) {
         return res.status(401).send({
+          status: 401,
           message: info.message,
           user
         });
@@ -21,6 +22,7 @@ module.exports = {
       req.logIn(user, (err) => {
         if ( err ) {
           return res.status(401).send({
+            status: 401,
             message: info.message,
             user
           });
@@ -29,6 +31,7 @@ module.exports = {
           expiresIn: '7d'
         });
         return res.send({
+          status: 200,
           message: info.message,
           user
         });
