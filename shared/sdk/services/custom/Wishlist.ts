@@ -30,7 +30,16 @@ export class WishlistApi extends BaseSailsApi {
     }
 
     public createPrizePool<PrizePool>(id: number, data: PrizePool): Observable<PrizePool> {
-        return this.http.post<PrizePool>(this.actionUrl + id + '/' + this.prizePoolRelation, data);
+        return new Observable(observer => {
+            this.http.post<PrizePool>(this.actionUrl + id + '/' + this.prizePoolRelation, data)
+            .subscribe( (prizePool: PrizePool) => {
+                observer.next(prizePool);
+            }, errResponse => {
+                observer.next(errResponse.error);
+            }, () => {
+                observer.complete();
+            });
+        });
     }
 
     public updateByIdParticipants(id: number, fk: number): Observable<Wishlist> {

@@ -27,7 +27,8 @@ module.exports = {
       return res.status(404).send({message: "Wishlist with id " + wishlistId + " does not exist"});
     }
 
-    if ( foundWishlists[0].prizePool ) { // une cagnotte existe déjà. Erreur.
+    const alreadyStoredPrizePools = await PrizePool.find({where: {wishlist: wishlistId}});
+    if ( alreadyStoredPrizePools.length > 0 ) { // Une cagnotte existe déjà. Erreur.
       return res.status(409).send({
         status: 409,
         message: "Cannot create a PrizePool to Wishlist with id " + wishlistId + " because a PrizePool already exists."

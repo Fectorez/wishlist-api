@@ -22,7 +22,8 @@ module.exports = {
 
     wishlist: {
       model: 'wishlist',
-      required: true
+      required: true,
+      unique: true
     },
 
     manager: {
