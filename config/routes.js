@@ -37,8 +37,9 @@ module.exports.routes = {
   'POST   /login': 'AuthController.login',
   '      /logout': 'AuthController.logout',
 
-  'POST /user/:id/wishlists': 'UserController.createWishlist',
-  'POST /wishlist/:id/items': 'WishlistController.createItem',
+  'POST /users/:id/wishlists': 'UserController.createWishlist',
+  'POST /wishlists/:id/items': 'WishlistController.createItem',
+  'POST /wishlists/:id/prizepool': 'WishlistController.createPrizePool',
 
 
 
