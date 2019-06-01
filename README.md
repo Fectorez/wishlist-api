@@ -50,7 +50,7 @@ UserApi :
 - `public createWishlist<Wishlist>(id: number, data: Wishlist): Observable<Wishlist>` (exemple: `this.userApi.createWishlist(2, wishlist_sans_attribut_user) crée une wishlist avec pour owner l'utilisateur 2`))
 WishlistApi :
 - `public createItem<Item>(id: number, data: Item): Observable<Item>`
-- `public createPrizePool<PrizePool>(id: number, data: PrizePool): Observable<PrizePool>`
+- `public createPrizePool<PrizePool>(id: number, data: PrizePool): Observable<PrizePool>` (si une PrizePool existe déjà la wishlist, alors l'erreur est: {status: 409, message "..."}, 409=Conflict)
 - `public updateByIdParticipants(id: number, fk: number): Observable<Wishlist>`
 - `public updateByIdItems(id: number, fk: number): Observable<Wishlist>`
 
