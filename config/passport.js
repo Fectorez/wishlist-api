@@ -34,7 +34,7 @@ passport.use(new LocalStrategy({
         email: user.email,
         id: user.id
       };
-      return cb(null, userDetails, { message: 'Login Succesful'});
+      return cb(null, userDetails, { message: 'Login Successful'});
     });
   });
 }));
