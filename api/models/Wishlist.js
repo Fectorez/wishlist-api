@@ -16,7 +16,7 @@ module.exports = {
 
     isPublic: {
       type: 'boolean',
-      defaultsTo: true
+      defaultsTo: false
     },
 
 
