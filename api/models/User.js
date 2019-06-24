@@ -33,6 +33,10 @@ module.exports = {
       required: true,
     },
 
+    image: {
+      type: 'string'
+    },
+
 
     categories: {
       collection: 'category',
