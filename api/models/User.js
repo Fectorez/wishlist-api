@@ -91,14 +91,10 @@ module.exports = {
       var jackpotsIds = [];
       users.forEach(function(recordToDestroy) {
         wishlistsIds = wishlistsIds.concat(_.pluck(recordToDestroy.wishlists, 'id'));
-        jackpotsIds = jackpotsIds.concat(_.pluck(recordToDestroy.jackpots, 'id'));
       });
       Wishlist.destroy({id: wishlistsIds}).exec(function(err) {
         if ( err ) return cb(err);
-        Jackpot.destroy({id: jackpotsIds}).exec(function(err) {
-          if ( err ) return cb(err);
-          return cb();
-        });
+        return cb();
       });
     });
   }

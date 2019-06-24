@@ -47,19 +47,19 @@ module.exports = {
   beforeDestroy: function(criteria, cb) {
     /*
       Détruire les relations avant l'objet lui-même
-      (items et jackpots)
+      (items et prizepools)
     */
-    Wishlist.find(criteria).populate('items').populate('jackpots').exec(function(err, wishlists) {
+    Wishlist.find(criteria).populate('items').populate('prizePool').exec(function(err, wishlists) {
       if ( err ) return cb(err);
       var itemsIds = [];
-      var jackpotsIds = [];
+      var prizePoolsIds = [];
       wishlists.forEach(function(recordToDestroy) {
         itemsIds = itemsIds.concat(_.pluck(recordToDestroy.items, 'id'));
-        jackpotsIds = jackpotsIds.concat(_.pluck(recordToDestroy.jackpots, 'id'));
+        prizePoolsIds = prizePoolsIds.concat(_.pluck(recordToDestroy.prizePool, 'id'));
       });
       Item.destroy({id: itemsIds}).exec(function(err) {
         if ( err ) return cb(err);
-        Jackpot.destroy({id: jackpotsIds}).exec(function(err) {
+        PrizePool.destroy({id: prizePoolsIds}).exec(function(err) {
           if ( err ) return cb(err);
           return cb();
         });
