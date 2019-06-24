@@ -83,12 +83,11 @@ module.exports = {
   beforeDestroy: function(criteria, cb) {
     /*
       Avant sa destruction, détruire ses relations
-      (wishlists, jackpots)
+      (wishlists)
     */
     User.find(criteria).populate('wishlists').exec(function(err, users) {
       if ( err ) return cb(err);
       var wishlistsIds = [];
-      var jackpotsIds = [];
       users.forEach(function(recordToDestroy) {
         wishlistsIds = wishlistsIds.concat(_.pluck(recordToDestroy.wishlists, 'id'));
       });
