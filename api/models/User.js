@@ -7,6 +7,21 @@
 
 const bcrypt = require('bcrypt-nodejs');
 
+function encryptPassword(user, cb) {
+  bcrypt.genSalt(10, (err, salt) => {
+    if( err ) {
+      return cb(err);
+    }
+    bcrypt.hash(user.password, salt, null, (err, hash) => {
+      if ( err ) {
+        return cb(err);
+      }
+      user.password = hash;
+      return cb();
+    });
+  })
+}
+
 module.exports = {
 
   attributes: {
@@ -69,20 +84,10 @@ module.exports = {
     return _.omit(this, ['password']);
   },
 
-  beforeCreate: function(user, cb) {
-    bcrypt.genSalt(10, (err, salt) => {
-      if( err ) {
-        return cb(err);
-      }
-      bcrypt.hash(user.password, salt, null, (err, hash) => {
-        if ( err ) {
-          return cb(err);
-        }
-        user.password = hash;
-        return cb();
-      });
-    });
-  },
+  beforeCreate: encryptPassword,
+
+  beforeUpdate: encryptPassword,
+
 
   beforeDestroy: function(criteria, cb) {
     /*
