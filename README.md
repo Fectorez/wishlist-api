@@ -87,3 +87,83 @@ this.authApi.login({email: 'toto2@yopmail.com', password: 'toto'}).subscribe((lo
     })
 });
 ```
+
+# Paypal
+
+D'abord git pull
+
+## Back
+
+Yen a pas car tout simplement ça marchait pas en passant par le back...
+
+## Front Androïd
+
+Pas encore vu...
+
+## Front web
+
+### Code HTML et Javascript
+
+<!-- Set up a container element for the button -->
+<div id="paypal-button-container"></div>
+
+<!-- Include the PayPal JavaScript SDK 
+  client-id est l'id de l'application créée dans developer.paypal (via mon compte jeremieroland@orange.fr)-->
+<script src="https://www.paypal.com/sdk/js?client-id=AU0bWy_C3EBJ0NTTtf_FlfKdPA1sTreLyJ-9S5bycKqgu6W69l_vQWQlfldWkMdFd7ycMa3sEV6aaksC&currency=EUR"></script>
+
+<script>
+    var donationAmount = 9.99;
+
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: donationAmount
+            }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          // Code à exécuté une fois la transaction terminée
+          alert('Transaction completed by ' + details.payer.name.given_name);
+          //Sauvegarder le don en base
+          return fetch('http://localhost:1337/save-donation', {
+            method: 'post',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+              amount: donationAmount,
+              donorId: 4, // this.authApi.getCurrentUserId()
+              prizePoolId: 1 // à définir
+            })
+          });
+        });
+      }
+  }).render('#paypal-button-container'); <!-- id de la div contenant le bouton -->
+</script>
+
+### Comptes fakes PayPal
+
+Deux comptes sont créés pour les tests : destinataire et un client qui lui se connectera lors du don.
+Ils sont enregistrés sur https://www.sandbox.paypal.com.
+
+## Compte professionnel
+
+- Email : wishit-business@gmail.com
+- Mdp : azerty123
+- Prénom : Jean
+- Nom: Dupont
+- Sole : ~1000€
+
+## Compte client
+
+Se connecter avec lui lors du don.
+
+- Email : wishit-personal@gmail.com
+- Mdp : azerty123
+- Prénom : Philippe
+- Nom: Durand
+- Sole : ~600€
