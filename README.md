@@ -103,7 +103,7 @@ Pas encore vu...
 ## Front web
 
 ### Code HTML et Javascript
-
+```
 <!-- Set up a container element for the button -->
 <div id="paypal-button-container"></div>
 
@@ -144,7 +144,7 @@ Pas encore vu...
       }
   }).render('#paypal-button-container'); <!-- id de la div contenant le bouton -->
 </script>
-
+```
 ### Comptes fakes PayPal
 
 Deux comptes sont créés pour les tests : destinataire et un client qui lui se connectera lors du don.
