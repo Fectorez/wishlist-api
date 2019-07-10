@@ -28,7 +28,8 @@ module.exports = {
     },
 
     link: {
-      type: 'string'
+      type: 'string',
+      columnType: 'varchar (2000)'
     },
 
     position: {
