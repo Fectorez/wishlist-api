@@ -48,6 +48,15 @@ module.exports.routes = {
   'GET /register': { view: 'register' },
   'GET    /login': { view: 'login' },
 
-  'get /user/token': 'AuthController.token'
+  'get /user/token': 'AuthController.token',
+
+  'POST /save-donation': 'PaypalController.saveDonation',
+
+
+  //'POST /paypal-transaction-complete': 'PaypalController.handleRequest',
+
+  //'POST /pay': 'PaypalController.pay',
+  //'GET /success': 'PaypalController.success',
+  //'GET /cancel': 'PaypalController.cancel'
 
 };
