@@ -7,15 +7,15 @@
 
 module.exports = {
 
-    saveFile: async function(req, res) {
+    saveImage: async function(req, res) {
         const file = req.file('file');
         let fileName;
 
         file.upload({
-            dirname: '../../uploads/'
+            dirname: '../../assets/images/'
         }, function(err, files) {
             if (err) return res.serverError(err);
-            
+
             let fileNameArray = files[0].fd.split("/");
             fileName = fileNameArray[fileNameArray.length - 1];
 
