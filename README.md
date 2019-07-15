@@ -71,6 +71,14 @@ createItemWithThisImage() {
     });
 }
 
+// pour juste uploader l'image
+public saveImageFile(imageFile: File): Observable<FileResponse> {
+      let formData: FormData = new FormData();
+      formData.append('file', imageFile, imageFile.name);
+
+      return this.http.post<FileResponse>(this.createImageFileUrl, formData);
+  }
+
 // HTML (juste pour avoir un input file, qui puisse appeler les méthodes)
 
 <input  (change)="fileChange($event)"  type="file"  class="custom-file-input"  id="inputGroupFile01"  aria-describedby="inputGroupFileAddon01">
