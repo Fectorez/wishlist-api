@@ -43,6 +43,40 @@ Pour chaque API de modèle sont présentes les méthodes suivantes (avec T le mo
 Sont aussi disponibles les méthodes GET pour chaque relation ; exemple pour récupérer les items d'une wishlist :
 - `findByIdItems<Item>(id: number): Observable<Item[]>`
 
+## Créer item avec image
+
+```
+// Component
+
+uploadedFiles: Array < File > ;
+
+fileChange(element) {
+    this.uploadedFiles = element.target.files;
+}
+
+createItemWithThisImage() {
+    let item = new Item();
+    item.wishlist = 2;
+    item.name = 'itemtestfile';
+    item.position = 1;
+    item.amount = 8.21;
+    item.description = 'une description';
+
+    this.itemApi.createWithImageFile(item, this.uploadedFiles[0]).subscribe( (item: any) => {
+      console.log("item stored with image = ", item);
+    }, err => {
+      console.log('err=',err);
+    }, () => {
+      console.log('complete')
+    });
+}
+
+// HTML (juste pour avoir un input file, qui puisse appeler les méthodes)
+
+<input  (change)="fileChange($event)"  type="file"  class="custom-file-input"  id="inputGroupFile01"  aria-describedby="inputGroupFileAddon01">
+<span  class="input-group-text upload"  (click)="createItemWithThisImage()"  id="btnUpload">Upload</span>
+```
+
 ### Autres
 D'autres méthodes supplémentaires pour les PUT et POST de relations (demander si d'autres sont nécessaires) :  
 UserApi :
@@ -66,7 +100,7 @@ Méthodes :
 - `public getCurrentUserId(): number`
 - `public getCurrentUserEmail(): string`
 - `public isAuthenticated(): boolean`
-- `public getCurrentUser(): Observable<User>` 
+- `public getCurrentUser(): Observable<User>`  
 
 
 Pour tester l'authentification :  
