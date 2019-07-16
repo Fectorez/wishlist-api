@@ -7,7 +7,12 @@
  * For more information on configuring custom routes, check out:
  * https://sailsjs.com/anatomy/config/routes-js
  */
-
+/*
+var path = require('path');
+var express = require('express');
+var dir = path.join(path.join(__dirname, '..'), 'public/');
+var serveStatic = require('serve-static');
+console.log("dir=",dir)*/
 module.exports.routes = {
 
   /***************************************************************************
@@ -59,6 +64,8 @@ module.exports.routes = {
   //'GET /success': 'PaypalController.success',
   //'GET /cancel': 'PaypalController.cancel'
 
-  'POST /save-file': 'FileController.saveFile'
+  'POST /save-image': 'FileController.saveImage',
+  //'/public/*': serveStatic(dir, {skipAssets: true}),
+  //'/public/*': express.static(dir)
 
 };
