@@ -59,4 +59,6 @@ module.exports.routes = {
   //'GET /success': 'PaypalController.success',
   //'GET /cancel': 'PaypalController.cancel'
 
+  'POST /save-file': 'FileController.saveFile'
+
 };
