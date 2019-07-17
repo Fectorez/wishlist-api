@@ -8,7 +8,16 @@
 module.exports = {
 
     saveImage: async function(req, res) {
-        const file = req.file('file');
+        let file;
+
+        // android
+        if ( req.body.caption ) {
+            file = req.file('image');
+        }
+        // angular
+        else {
+            file = req.file('file');
+        }
 
         file.upload({
             dirname: '../../assets/images/'
