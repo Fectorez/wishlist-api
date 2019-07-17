@@ -9,19 +9,19 @@ module.exports = {
 
     saveImage: async function(req, res) {
         let file;
+        let options = {dirname: '../../assets/images/'};
 
         // android
-        if ( req.body.caption ) {
+        if ( req.file('image') ) {
             file = req.file('image');
+            options['saveAs'] = file._files[0].stream.filename;
         }
         // angular
         else {
             file = req.file('file');
         }
-
-        file.upload({
-            dirname: '../../assets/images/'
-        }, function(err, files) {
+        
+        file.upload(options, function(err, files) {
             if (err) return res.serverError(err);
 
             let fullPathArray = files[0].fd.split("/");
