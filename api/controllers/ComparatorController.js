@@ -7,8 +7,10 @@ const cheerio = require("cheerio");
 module.exports = {
 
   comparator: async function(req, res) {
-    var stringAmazon = req.query.string.replace(' ', '+');
-    var stringCommerce = req.query.string.replace(' ', '-');
+    var stringAmazon = req.query.string.replace(/ /g, '+');
+    var stringCommerce = req.query.string.replace(/ /g, '-');
+    stringCommerce = stringCommerce.replace(/é/g, '-');
+    stringCommerce = stringCommerce.replace(/è/g, '-');
 
     const result = await axios.get(amazonUrl + stringAmazon);
     const $ = cheerio.load(result.data);
@@ -25,10 +27,10 @@ module.exports = {
 
     return res.send({
           status: 200,
-          priceAmazon: priceAmazon,
+          priceAmazon: priceAmazon + "€",
           linkAmazon: amazonUrl + stringAmazon,
-          priceCommerce: priceCommerce,
-          linkCommercenode: commerceUrl + stringCommerce
+          priceCommerce: priceCommerce + "€",
+          linkCommerce: commerceUrl + stringCommerce
         });
   }
 
