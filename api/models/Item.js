@@ -29,7 +29,8 @@ module.exports = {
 
     link: {
       type: 'string',
-      maxLength: 2000
+      maxLength: 2000,
+      columnType: 'text'
     },
 
     position: {

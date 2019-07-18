@@ -12,14 +12,17 @@ module.exports = {
         let options = {dirname: '../../assets/images/'};
 
         // android
-        if ( req.file('image') ) {
+        if ( req.body.caption) {
             file = req.file('image');
-            options['saveAs'] = file._files[0].stream.filename;
+            options['saveAs'] = req.body.caption;
         }
+
         // angular
         else {
             file = req.file('file');
         }
+
+        
         
         file.upload(options, function(err, files) {
             if (err) return res.serverError(err);
