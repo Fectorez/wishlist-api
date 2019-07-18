@@ -1,6 +1,5 @@
 const amazonUrl = "https://www.amazon.fr/s?k=";
 const commerceUrl = "https://www.rueducommerce.fr/recherche/";
-const discountUrl = "https://www.cdiscount.com/search/10/";
 
 const axios = require("axios");
 const cheerio = require("cheerio");
@@ -27,7 +26,9 @@ module.exports = {
     return res.send({
           status: 200,
           priceAmazon: priceAmazon,
-          priceCommerce: priceCommerce
+          linkAmazon: amazonUrl + stringAmazon,
+          priceCommerce: priceCommerce,
+          linkCommercenode: commerceUrl + stringCommerce
         });
   }
 
