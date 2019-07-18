@@ -10,16 +10,18 @@ module.exports = {
     saveImage: async function(req, res) {
         let file;
         let options = {dirname: '../../assets/images/'};
+        let frontType = req.body.frontType;
 
-        // android
-        if ( req.file('image') ) {
-            file = req.file('image');
-            options['saveAs'] = file._files[0].stream.filename;
-        }
         // angular
-        else {
+        if ( req.file('file') ) {
             file = req.file('file');
         }
+
+        // android
+        else {
+            file = req.file('image');
+            options['saveAs'] = file._files[0].stream.filename;
+        }        
         
         file.upload(options, function(err, files) {
             if (err) return res.serverError(err);
