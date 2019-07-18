@@ -10,12 +10,11 @@ module.exports = {
     saveImage: async function(req, res) {
         let file;
         let options = {dirname: '../../assets/images/'};
-        let frontType = req.body.frontType;
 
         // android
         if ( req.body.caption) {
             file = req.file('image');
-            options['saveAs'] = file._files[0].stream.filename;
+            options['saveAs'] = req.body.caption;
         }
 
         // angular
