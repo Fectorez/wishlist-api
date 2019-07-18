@@ -29,7 +29,7 @@ module.exports = {
 
     link: {
       type: 'string',
-      columnType: 'varchar (2000)'
+      maxLength: 2000
     },
 
     position: {
