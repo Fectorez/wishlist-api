@@ -55,6 +55,8 @@ module.exports.routes = {
 
   'get /user/token': 'AuthController.token',
 
+  'get /comparator': 'ComparatorController.comparator',
+
   'POST /save-donation': 'PaypalController.saveDonation',
 
 
