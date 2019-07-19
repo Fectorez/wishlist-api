@@ -8,6 +8,9 @@
 const bcrypt = require('bcrypt-nodejs');
 
 function encryptPassword(user, cb) {
+  if ( !user.password ) {
+    return cb();
+  }
   bcrypt.genSalt(10, (err, salt) => {
     if( err ) {
       return cb(err);
@@ -19,7 +22,7 @@ function encryptPassword(user, cb) {
       user.password = hash;
       return cb();
     });
-  })
+  });
 }
 
 module.exports = {
