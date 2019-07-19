@@ -15,7 +15,6 @@ module.exports = {
     },
 
 
-
     prizePool: {
       model: 'prizepool',
       required: true
