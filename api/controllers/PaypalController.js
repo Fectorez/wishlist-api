@@ -1,14 +1,14 @@
 // 1. Set up your server to make calls to PayPal
 
 // 1a. Import the SDK package
-const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
+//const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
 
 // 1b. Import the PayPal SDK client that was created in `Set up Server-Side SDK`.
 /**
  *
  * PayPal HTTP client dependency
  */
-const payPalClient = require('../../config/paypal');
+//const payPalClient = require('../../config/paypal');
 
 const paypal = require('paypal-rest-sdk');
 paypal.configure({
