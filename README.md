@@ -154,11 +154,11 @@ this.prizePoolApi.collectDonations(1).subscribe(res => {
 
 ### API Androïd
 ```
-WishlistApi wishlistApi = new WishlistApi();
+PrizePoolApi prizePoolApi = new PrizePoolApi();
 JSONObject jsonResult = null;
 try {
     Log.i("TAGTAG", "collect...");
-    jsonResult = wishlistApi.collectDonations(1);
+    jsonResult = prizePoolApi.collectDonations(1);
 } catch (UnsupportedEncodingException e) {
     e.printStackTrace();
 } catch (JSONException e) {
