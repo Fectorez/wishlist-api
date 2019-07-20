@@ -27,9 +27,11 @@ module.exports = {
         file.upload(options, function(err, files) {
             if (err) return res.serverError(err);
 
-            let fullPathArray = files[0].fd.split("/");
-            let fullPath = fullPathArray[fullPathArray.length - 1];
+            if ( req.body.caption ) {
+                return res.send();
+            }
 
+            let fullPath = files[0].fd;
             let fileName = fullPath.split("\\")[fullPath.split("\\").length - 1];
 
             res.json({

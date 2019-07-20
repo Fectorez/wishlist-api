@@ -132,15 +132,15 @@ this.authApi.login({email: 'toto2@yopmail.com', password: 'toto'}).subscribe((lo
 
 # Paypal
 
-D'abord git pull
+## Recevoir les dons à la date de fin de la wishlist
 
-## Back
-
-Yen a pas car tout simplement ça marchait pas en passant par le back...
-
-## Front Androïd
-
-Pas encore vu...
+POST localhost:1337/receive-donations
+data:
+{
+	"wishlistId": <wishlist_id>
+}
+Le propriétaire de la wishlist reçoit la somme des dons
+l'attribut 'collected' de la BD passe à true
 
 ## Front web
 

@@ -14,6 +14,11 @@ module.exports = {
       required: true
     },
 
+    collected: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
 
     prizePool: {
       model: 'prizepool',
