@@ -7,8 +7,6 @@ import { SailsConfig } from '../../sails.config';
 
 @Injectable()
 export class WishlistApi extends BaseSailsApi {
-    private collectDonationsUrl = SailsConfig.getPath() + '/receive-donations';
-
     private relations = Wishlist.getModelDefinition().relations;
     private itemsRelation: string = this.relations.items.name + '/';
     private participantsRelation: string = this.relations.participants.name + '/';
@@ -51,10 +49,5 @@ export class WishlistApi extends BaseSailsApi {
 
     public updateByIdItems(id: number, fk: number): Observable<Wishlist> {
         return this.http.put<Wishlist>(this.actionUrl + id + '/' + this.itemsRelation + fk, {});
-    }
-
-
-    public collectDonations(id: number): Observable<any> {
-        return this.http.post(this.collectDonationsUrl, {wishlistId: id});
     }
 }

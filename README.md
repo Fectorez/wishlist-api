@@ -144,8 +144,8 @@ l'attribut 'collected' de la BD passe à true
 
 ### API Angular
 ```
-1 => id de la wishlist
-this.wishlistApi.collectDonations(1).subscribe(res => {
+1 => id de la prizePool
+this.prizePoolApi.collectDonations(1).subscribe(res => {
   console.log('res=',res);
 }, err => {
   console.log('err=',err)
