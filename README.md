@@ -143,12 +143,33 @@ Le propriétaire de la wishlist reçoit la somme des dons
 l'attribut 'collected' de la BD passe à true
 
 ### API Angular
+```
 1 => id de la wishlist
 this.wishlistApi.collectDonations(1).subscribe(res => {
   console.log('res=',res);
 }, err => {
   console.log('err=',err)
 })
+```
+
+### API Androïd
+```
+WishlistApi wishlistApi = new WishlistApi();
+JSONObject jsonResult = null;
+try {
+    Log.i("TAGTAG", "collect...");
+    jsonResult = wishlistApi.collectDonations(1);
+} catch (UnsupportedEncodingException e) {
+    e.printStackTrace();
+} catch (JSONException e) {
+    e.printStackTrace();
+} catch (ExecutionException e) {
+    e.printStackTrace();
+} catch (InterruptedException e) {
+    e.printStackTrace();
+}
+Log.i("TAGTAG", "jsonresult="+jsonResult);
+```
 
 ## Front web
 
