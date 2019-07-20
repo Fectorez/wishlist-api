@@ -58,6 +58,7 @@ module.exports.routes = {
   'get /comparator': 'ComparatorController.comparator',
 
   'POST /save-donation': 'PaypalController.saveDonation',
+  'POST /receive-donations': 'PaypalController.receiveDonations',
 
 
   //'POST /paypal-transaction-complete': 'PaypalController.handleRequest',
