@@ -26,12 +26,12 @@ module.exports = {
     priceCommerce = priceCommerce.replace('€', ',');
 
     return res.send({
-          status: 200,
-          priceAmazon: priceAmazon + "€",
-          linkAmazon: amazonUrl + stringAmazon,
-          priceCommerce: priceCommerce + "€",
-          linkCommerce: commerceUrl + stringCommerce
-        });
+      status: 200,
+      priceAmazon: priceAmazon + "€",
+      linkAmazon: amazonUrl + stringAmazon,
+      priceCommerce: priceCommerce + "€",
+      linkCommerce: commerceUrl + stringCommerce
+    });
   }
 
 };
