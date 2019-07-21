@@ -238,3 +238,14 @@ Se connecter avec lui lors du don.
 - Prénom : Philippe
 - Nom: Durand
 - Sole : ~600€
+
+
+# Amazon Angular
+```
+this.itemApi.getDataFromAmazonUrl('https://www.amazon.fr/Tommy-Hilfiger-Elevated-Crossover-8-5x17x30/dp/B07L2ZZMY5/ref=sr_1_1?m=A1X6FK5RDHNB96&pf_rd_p=18a57e06-be3c-4f94-bc9c-a98468c1c84b&pf_rd_r=N370DT5NQSDYGHEWCAJA&qid=1563716704&refinements=p_6%3AA1X6FK5RDHNB96&s=apparel&sr=1-1')
+    .subscribe( (item: Item) => {
+      console.log("itemdata=",item);
+    }, err => {
+      console.log('err=',err);
+    });
+```
