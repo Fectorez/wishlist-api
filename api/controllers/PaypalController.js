@@ -131,29 +131,30 @@ console.log("orderid=",orderID)
     },
 
     receiveDonations: async function(req, res) {
-        const wishlistId = parseInt(req.body.wishlistId);
-        
-        // Find wishlist
-        const foundWishlists = await Wishlist.find({where: {id: wishlistId}}).populate('prizePool');
-        if ( foundWishlists.length == 0 ) {
-            return res.error({message: "Wishlist with id " + wishlistId + " does not exist"});
-        }
-        const wishlist = foundWishlists[0];
-
-        // Find receiver
-        const receiverId = wishlist.owner;
-        const receivers = await User.find({where: {id: receiverId}});
-        if ( receivers.length == 0 ) {
-            return res.error({message: "Owner of wishlist " + wishlistId + " does not exist"});
-        }
-        const receiver = receivers[0];
+        const prizePoolId = parseInt(req.body.prizePoolId);
 
         // Find prizePool
-        const prizePools = wishlist.prizePool;
+        const prizePools = await PrizePool.find({where: {id: prizePoolId}});
         if ( prizePools.length == 0 ) {
-            return res.error({message: "PrizePool with of wishlist " + wishlistId + " does not exist"});
+            return res.error({message: "PrizePool with id " + prizePoolId + " does not exist"});
         }
         const prizePool = prizePools[0];
+
+        // Check end date
+        const endDate = new Date(0); 
+        endDate.setUTCSeconds(prizePool.endDate);
+        const today = new Date();
+        if ( endDate < today ) {
+            return res.error({message: "PrizePool with id " + prizePoolId + " is not finished (endDate: " + endDate + ")"});
+        }
+
+        // Find receiver
+        const receiverId = prizePool.manager;
+        const receivers = await User.find({where: {id: receiverId}});
+        if ( receivers.length == 0 ) {
+            return res.error({message: "Manager of prizePool " + prizePoolId + " does not exist"});
+        }
+        const receiver = receivers[0];
 
         // Find amount
         let fullAmount = 0;
