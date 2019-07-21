@@ -62,6 +62,7 @@ module.exports.routes = {
   'POST /receive-donations': 'PaypalController.receiveDonations',
 
   'POST /find-item-data-from-amazon-url': 'ItemController.findDataFromAmazonUrl',
+  'POST /create-item-from-amazon-url': 'ItemController.createItemFromAmazonUrl',
 
 
   //'POST /paypal-transaction-complete': 'PaypalController.handleRequest',

@@ -242,10 +242,21 @@ Se connecter avec lui lors du don.
 
 # Amazon Angular
 ```
+// Récupérer les info :
 this.itemApi.getDataFromAmazonUrl('https://www.amazon.fr/Tommy-Hilfiger-Elevated-Crossover-8-5x17x30/dp/B07L2ZZMY5/ref=sr_1_1?m=A1X6FK5RDHNB96&pf_rd_p=18a57e06-be3c-4f94-bc9c-a98468c1c84b&pf_rd_r=N370DT5NQSDYGHEWCAJA&qid=1563716704&refinements=p_6%3AA1X6FK5RDHNB96&s=apparel&sr=1-1')
     .subscribe( (item: Item) => {
       console.log("itemdata=",item);
     }, err => {
       console.log('err=',err);
     });
+
+// Créer l'item (position par défaut)
+// 1 = wishlist id
+this.itemApi.createFromAmazonUrl('https://www.amazon.fr/LEXIBOOK-RCD102SL-Radio-lecteur-Luna/dp/B01FS3SO10?ref_=Oct_BSellerC_14060451_3&pf_rd_p=32177ffb-1716-5d25-9eab-2090a7e14e32&pf_rd_s=merchandised-search-6&pf_rd_t=101&pf_rd_i=14060451&pf_rd_m=A1X6FK5RDHNB96&pf_rd_r=4C3N68XK6THWNN73CRJM&pf_rd_r=4C3N68XK6THWNN73CRJM&pf_rd_p=32177ffb-1716-5d25-9eab-2090a7e14e32',
+1)
+.subscribe( (item: Item) => {
+  console.log("created itemdata=",item);
+}, err => {
+  console.log('err=',err);
+});
 ```
