@@ -26,6 +26,7 @@ module.exports = {
         
         file.upload(options, function(err, files) {
             if (err) return res.serverError(err);
+            console.log("HERE");
 
             if ( req.body.caption ) {
                 return res.send();
